@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+
+
+    <title>Personal Photo Gallery-Moments Scanner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="2img.jpg" alt="Website Logo" class="logo" id="logo">
+            <div class="site-name"></a>Moments Scanner</div>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a class="active" href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#updates">Updates</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+               
+               
+               
+            </ul>
+        </nav>
+        <button id="download-pdf" class="download-pdf">Download All as PDF</button>
+    </header>
+
+    <!-- home section starts -->
+    <section class="home" id="home">
+        <div class="typing-demo" id="welcomeMessage"></div>
+    </div>
+
+    <div class="welcome-container">
+        <h1 id="welcome-message">Welcome to Our Photo Gallery!</h1>
+        <p>We're thrilled to have you here. Whether you're a seasoned photographer, a budding artist, or simply someone who enjoys the beauty of images, this is your space to explore, create, and share. Dive into our collection, upload your own masterpieces, and become a part of our vibrant community. Your journey through visual storytelling begins now—enjoy every moment!</p>
+    </div>
+
+
+    <main>
+        <div class="container">
+            <div class="gallery" id="gallery"></div>
+        </div>
+    </main>
+    <footer>
+        <label class="custom-file-upload">
+            <input type="file" id="fileInput" accept="image/*,video/*" multiple>
+            Upload Files
+        </label>
+    </footer>
+    <div id="fullscreen-container" class="fullscreen-container">
+        <img id="fullscreen-image" class="fullscreen-image" src="" alt="Fullscreen">
+        <button id="close-fullscreen" class="close-fullscreen">Close</button>
+    </div>
+   </section>
+
+<!-- home section ends -->
+
+    <!-- about section starts -->
+<section class="about" id="about">
+    <h2 class="aboutme"><i class="fas fa-user-alt"></i> About <span>Me</span></h2>
+    
+    <div class="row">
+
+    <div class="image">
+        <img draggable="false" class="tilt" src="mypic1.jpg" alt="">
+    </div>
+    <div class="content">
+        <h3>I'm Nitish Kumar</h3>
+        <span class="tag">Aspiring Software/Web Developer</span>
+        
+        <p>🔭<b>Bachelors of Technology: Artificial Intelligence and Machine Learning </b><br>
+          ✒️ Chandigarh Group of Colleges (CGC), Landran (Mohali)
+          Specialization in advanced technology, artificial intelligence, and machine learning.
+          Practical implementation of technology in our daily lives and personal projects. <br>
+          🌱 I’m currently learning Data Structures and Full Stack Development.<br>
+          🔭 I’m looking to collaborate on Front-end development projects and another opportunity also.</p>
+        
+        <div class="box-container">
+            <div class="box">
+              <p><span> Email : </span> nitishk38938@gmail.com</p>
+              <p><span> Place : </span> Fatehgargh Sahib, India - 140406</p>
+            </div>
+        </div>
+        
+        <div class="resumebtn">
+            <a href="https://drive.google.com/file/d/112nn03eTBMRgDIZyBaMMEgz-xRgJ-pNw/view?usp=sharing" target="_blank" class="btn"><span>Resume</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+
+    </div>
+    </div>
+</section>
+<!-- about section ends -->
+
+<!-- Updates Section -->
+
+  <section id="updates" id="contact"> 
+
+    <h2 class="tme"><i class="fas fa-new"></i> New <span>Updates</span></h2>
+  
+
+  <div id="updates-container">
+     <h2>Features Of Website : <span>NEW UPDATES </span></h2>
+<p><i>
+ 
+1. Dynamic Image/Video Gallery: Displays up to 130 images or videos, adjusting automatically for various screen. <br>
+2. Interactive Typing Animation: A customizable welcome message with a typing and deletion animation.<br>
+3. Local Storage Integration Saves and loads uploaded items directly from local storage, preserving gallery content.<br>
+4. File Upload & Management: Allows users to upload images/videos, with options to download or delete each item.<br>
+5. Fullscreen Viewing Mode: View images in fullscreen with easy access using an expandable interface.<br>
+6. PDF Export Option: Download all images as a PDF file for easy sharing or saving.<br>
+7.Updates Section: Displays version updates and new features with accordion-style expandable details.</p></i>
+
+  </div>
+</section>
+
+
+
+<!-- contact section starts -->
+<section class="contact" id="contact">
+  
+    <h2 class="contme"><i class="fas fa-headset"></i> Get in <span>Touch</span></h2>
+  
+    <div class="container">
+      <div class="content">
+        <div class="image-box">
+          <img draggable="false" src="contact1.png" alt="">
+        </div>
+      <form id="contact-form">
+        
+        <div class="form-group">
+          <div class="field">
+            <input type="text" name="name" placeholder="Name" required class="username">
+            <i class='fas fa-user'></i>
+          </div>
+          <div class="field">
+            <input type="text" name="email" placeholder="Email" required>
+            <i class='fas fa-envelope'></i>
+          </div>
+          <div class="field">
+            <input type="text" name="phone" placeholder="Phone">
+            <i class='fas fa-phone-alt'></i>
+          </div>
+          <div class="message">
+          <textarea placeholder="Message" name="message" required></textarea>
+          <i class="fas fa-comment-dots"></i>
+          </div>
+          </div>
+        <div class="button-area">
+          <button type="submit">
+            Submit <i class="fa fa-paper-plane"></i></button>
+        </div>
+      </form>
+    </div>
+    </div>
+  </section>
+  <!-- contact section ends -->
+  
+  
+  <!-- footer section starts -->
+  <section class="footer">
+  
+    <div class="box-container">
+  
+        <div class="box">
+            <h3>Nitish Kumar - Personal Photo Storage</h3>
+            <p>Thank you for visiting my <b> Moments Scanner</b> website. Connect with me over other social media plateform. <br/> <br/> Keep Rising 🚀. Connect with me over live chat!</p>
+        </div>
+  
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#home"><i class="fas fa-chevron-circle-right"></i> Home</a>
+            <a href="#about"><i class="fas fa-chevron-circle-right"></i> About</a>
+            <a href="#update"><i class="fas fa-chevron-circle-right"></i> Updates</a>
+            <a href="#contact"><i class="fas fa-chevron-circle-right"></i>Contact</a>
+          
+        </div>
+  
+        <div class="box">
+            <h3>contact info</h3>
+            <p> <i class="fas fa-phone"></i>+917814889581</p>
+            <p> <i class="fas fa-envelope"></i>nitishk38938@gmail.com</p>
+            <p> <i class="fas fa-map-marked-alt"></i>Fatehgargh Sahib, Punjab - 140406</p>
+            <div class="share">
+  
+                <a href="https://www.linkedin.com/in/nitish-kumar-794a0b26b/" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+                <a href="https://github.com/nitishkumar2026" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+                <a href="mailto:nitishk38938@gmail.com" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+  
+            </div>
+        </div>
+    </div>
+  
+    
+  </section>
+  <!-- footer section ends -->
+  
+  
+  <!-- scroll top btn -->
+  <a href="#home" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+  <!-- scroll back to top -->
+  
+  
+  <!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+  <!-- jquery cdn    For skills from skills.json-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <!-- typed.js cdn  for typing Android,Web dev......-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <!-- particle.js links -->
+  <script src="./assets/js/particles.min.js"></script>
+  <script src="./assets/js/app.js"></script>
+  
+  <!-- vanilla tilt.js links ----For making imgages tilt by hovering-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js" integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <!-- scroll reveal anim -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="assets/js/scrollreveal.js"></script>
+  
+  <!-- for emailjs-com --- -->
+  <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+      ></script>
+  
+  <!-- for icons -->
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  
+  <!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+  
+
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
