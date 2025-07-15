@@ -2,249 +2,418 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Favicon -->
-
-
-    <title>Personal Photo Gallery-Moments Scanner</title>
+    <!-- Favicon - Load early -->
+    <link rel="icon" type="image/x-icon" href="2img.jpg">
+    <title>Moments Scanner - Your Personal Photo Gallery</title>
+    
+    <!-- Critical CSS -->
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Inline critical JS for faster initial rendering -->
+    <script>
+        // Hide preloader immediately
+        document.addEventListener('DOMContentLoaded',function(){
+            var preloader = document.querySelector('.preloader');
+            if(preloader){preloader.style.display='none';}
+        });
+    </script>
+    <script defer src="script.js"></script>
 </head>
 <body>
+    <!-- Preloader (Hidden by default for faster loading) -->
+    <div class="preloader" style="display: none;">
+        <div class="loader">
+            <i class="fas fa-camera-retro"></i>
+            <p>Loading Memories...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
     <header>
         <div class="logo-container">
             <img src="2img.jpg" alt="Website Logo" class="logo" id="logo">
-            <div class="site-name"></a>Moments Scanner</div>
+            <div class="site-name">Moments Scanner</div>
         </div>
         <nav class="navbar">
             <ul>
-                <li><a class="active" href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#updates">Updates</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-               
-               
-               
+                <li><a class="active" href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#gallery-section"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#updates"><i class="fas fa-bell"></i> Updates</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
-        <button id="download-pdf" class="download-pdf">Download All as PDF</button>
+        <div class="header-buttons">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="download-pdf" class="download-pdf"><i class="fas fa-file-pdf"></i> Download PDF</button>
+        </div>
     </header>
 
-    <!-- home section starts -->
-    <section class="home" id="home">
-        <div class="typing-demo" id="welcomeMessage"></div>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="hero-title">Capture Your <span>Precious Moments</span></h1>
 
-    <div class="welcome-container">
-        <h1 id="welcome-message">Welcome to Our Photo Gallery!</h1>
-        <p>We're thrilled to have you here. Whether you're a seasoned photographer, a budding artist, or simply someone who enjoys the beauty of images, this is your space to explore, create, and share. Dive into our collection, upload your own masterpieces, and become a part of our vibrant community. Your journey through visual storytelling begins now—enjoy every moment!</p>
-    </div>
-
-
-    <main>
-        <div class="container">
-            <div class="gallery" id="gallery"></div>
+            <p class="hero-description">Store, organize, and share your memories in one beautiful place</p>
+            <div class="hero-buttons">
+                <a href="#gallery-section" class="view-gallery-btn">
+                    <i class="fas fa-images"></i> View Gallery
+                </a>
+            </div>
         </div>
-    </main>
-    <footer>
-        <label class="custom-file-upload">
-            <input type="file" id="fileInput" accept="image/*,video/*" multiple>
-            Upload Files
-        </label>
+        <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
+            <div class="image-stack">
+                <div class="image-stack-item image-stack-item-top">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000" alt="Photography" loading="lazy" width="400" height="300">
+                </div>
+                <div class="image-stack-item image-stack-item-middle">
+                    <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?q=80&w=1000" alt="Photography" loading="lazy" width="400" height="300">
+                </div>
+                <div class="image-stack-item image-stack-item-bottom">
+                    <img src="https://images.unsplash.com/photo-1500051638674-ff996a0ec29e?q=80&w=1000" alt="Photography" loading="lazy" width="400" height="300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Why Choose <span>Moments Scanner</span></h2>
+            <p>Discover the powerful features that make managing your photos effortless</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Easy Uploads</h3>
+                <p>Quickly upload multiple photos and videos with our intuitive interface</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Responsive Design</h3>
+                <p>Access your gallery from any device with our fully responsive layout</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Your <span>Photo Gallery</span></h2>
+            <p>Upload, view, and manage your precious memories</p>
+        </div>
+        
+        <div class="gallery-controls">
+            <div class="search-container">
+                <input type="text" id="gallery-search" placeholder="Search your gallery...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+            </div>
+
+        </div>
+        
+        <div class="gallery-grid" id="gallery">
+            <!-- Gallery items will be dynamically added here -->
+            <div class="gallery-empty-state">
+                <i class="fas fa-images"></i>
+                <h3>Your gallery is empty</h3>
+                <p>Upload your first photo or video to get started</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-header" data-aos="fade-up">
+            <h2>About <span>Moments Scanner</span></h2>
+            <p>Learn more about our photo gallery application</p>
+        </div>
+        
+        <div class="about-container">
+            <div class="about-image" data-aos="fade-right">
+                <img src="https://images.unsplash.com/photo-1552168324-d612d77725e3?q=80&w=1000" alt="About Moments Scanner">
+            </div>
+            <div class="about-content" data-aos="fade-left">
+                <h3>Your Personal Photo Gallery</h3>
+                <p>Moments Scanner is a modern, intuitive photo gallery application designed to help you organize and showcase your precious memories. Our platform offers a seamless experience for uploading, viewing, and sharing your photos and videos.</p>
+                
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>User-friendly interface</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Responsive design for all devices</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Local storage for privacy</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>PDF export functionality</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Dark mode support</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Filter and search capabilities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updates Section -->
+    <section class="updates-section" id="updates">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Latest <span>Updates</span></h2>
+            <p>Stay informed about our newest features and improvements</p>
+        </div>
+        
+        <div class="updates-container">
+            <div class="update-card" data-aos="fade-up">
+                <div class="update-date">
+                    <span class="day">15</span>
+                    <span class="month">Jun</span>
+                </div>
+                <div class="update-content">
+                    <h3>Dark Mode Support</h3>
+                    <p>We've added a new dark mode feature to make browsing your gallery easier on the eyes in low-light environments.</p>
+                    <div class="update-tags">
+                        <span class="tag">New Feature</span>
+                        <span class="tag">UI Improvement</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="update-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="update-date">
+                    <span class="day">02</span>
+                    <span class="month">Jun</span>
+                </div>
+                <div class="update-content">
+                    <h3>Search Functionality</h3>
+                    <p>You can now search through your gallery to quickly find specific photos or videos.</p>
+                    <div class="update-tags">
+                        <span class="tag">New Feature</span>
+                        <span class="tag">Usability</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="update-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="update-date">
+                    <span class="day">20</span>
+                    <span class="month">May</span>
+                </div>
+                <div class="update-content">
+                    <h3>Video Support</h3>
+                    <p>Moments Scanner now supports video uploads, allowing you to store and view your video memories alongside your photos.</p>
+                    <div class="update-tags">
+                        <span class="tag">New Feature</span>
+                        <span class="tag">Media Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Get In <span>Touch</span></h2>
+            <p>Have questions or feedback? We'd love to hear from you</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info" data-aos="fade-right">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p>nitishk38938@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Phone</h3>
+                        <p>+917814889581</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Location</h3>
+                        <p>Fatehgargh Sahib, Punjab - 140406</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/nitish-kumar-794a0b26b/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/nitishkumar2026" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:nitishk38938@gmail.com" class="social-link" target="_blank"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-form" data-aos="fade-left">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" placeholder="Subject" required>
+                        <i class="fas fa-heading"></i>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-container">
+                <div class="footer-column" data-aos="fade-up">
+                    <div class="footer-logo">
+                        <img src="2img.jpg" alt="Moments Scanner Logo">
+                        <h3>Moments Scanner</h3>
+                    </div>
+                    <p>Your personal photo gallery application designed to help you organize and showcase your precious memories.</p>
+                    <div class="footer-social">
+                        <a href="https://www.linkedin.com/in/nitish-kumar-794a0b26b/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/nitishkumar2026" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="mailto:nitishk38938@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#gallery-section"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#updates"><i class="fas fa-chevron-right"></i> Updates</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Features</h3>
+                    <ul class="footer-features">
+                        <li><i class="fas fa-check-circle"></i> Upload photos & videos</li>
+                        <li><i class="fas fa-check-circle"></i> Local storage integration</li>
+                        <li><i class="fas fa-check-circle"></i> PDF export functionality</li>
+                        <li><i class="fas fa-check-circle"></i> Responsive design</li>
+                        <li><i class="fas fa-check-circle"></i> Dark mode support</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+917814889581</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>nitishk38938@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Fatehgargh Sahib, Punjab - 140406</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-container">
+                <p>&copy; 2023 Moments Scanner. Designed by <span>Nitish Kumar</span></p>
+                <div class="footer-upload">
+                    <label class="custom-file-upload">
+                        <input type="file" id="footerFileInput" accept="image/*,video/*" multiple>
+                        <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                    </label>
+                </div>
+                <a href="#home" class="scroll-top">
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
+        </div>
     </footer>
-    <div id="fullscreen-container" class="fullscreen-container">
-        <img id="fullscreen-image" class="fullscreen-image" src="" alt="Fullscreen">
-        <button id="close-fullscreen" class="close-fullscreen">Close</button>
-    </div>
-   </section>
 
-<!-- home section ends -->
-
-    <!-- about section starts -->
-<section class="about" id="about">
-    <h2 class="aboutme"><i class="fas fa-user-alt"></i> About <span>Me</span></h2>
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-    <div class="row">
-
-    <div class="image">
-        <img draggable="false" class="tilt" src="mypic1.jpg" alt="">
-    </div>
-    <div class="content">
-        <h3>I'm Nitish Kumar</h3>
-        <span class="tag">Aspiring Software/Web Developer</span>
-        
-        <p>🔭<b>Bachelors of Technology: Artificial Intelligence and Machine Learning </b><br>
-          ✒️ Chandigarh Group of Colleges (CGC), Landran (Mohali)
-          Specialization in advanced technology, artificial intelligence, and machine learning.
-          Practical implementation of technology in our daily lives and personal projects. <br>
-          🌱 I’m currently learning Data Structures and Full Stack Development.<br>
-          🔭 I’m looking to collaborate on Front-end development projects and another opportunity also.</p>
-        
-        <div class="box-container">
-            <div class="box">
-              <p><span> Email : </span> nitishk38938@gmail.com</p>
-              <p><span> Place : </span> Fatehgargh Sahib, India - 140406</p>
-            </div>
-        </div>
-        
-        <div class="resumebtn">
-            <a href="https://drive.google.com/file/d/112nn03eTBMRgDIZyBaMMEgz-xRgJ-pNw/view?usp=sharing" target="_blank" class="btn"><span>Resume</span>
-                <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-    </div>
-    </div>
-</section>
-<!-- about section ends -->
-
-<!-- Updates Section -->
-
-  <section id="updates" id="contact"> 
-
-    <h2 class="tme"><i class="fas fa-new"></i> New <span>Updates</span></h2>
-  
-
-  <div id="updates-container">
-     <h2>Features Of Website : <span>NEW UPDATES </span></h2>
-<p><i>
- 
-1. Dynamic Image/Video Gallery: Displays up to 130 images or videos, adjusting automatically for various screen. <br>
-2. Interactive Typing Animation: A customizable welcome message with a typing and deletion animation.<br>
-3. Local Storage Integration Saves and loads uploaded items directly from local storage, preserving gallery content.<br>
-4. File Upload & Management: Allows users to upload images/videos, with options to download or delete each item.<br>
-5. Fullscreen Viewing Mode: View images in fullscreen with easy access using an expandable interface.<br>
-6. PDF Export Option: Download all images as a PDF file for easy sharing or saving.<br>
-7.Updates Section: Displays version updates and new features with accordion-style expandable details.</p></i>
-
-  </div>
-</section>
-
-
-
-<!-- contact section starts -->
-<section class="contact" id="contact">
-  
-    <h2 class="contme"><i class="fas fa-headset"></i> Get in <span>Touch</span></h2>
-  
-    <div class="container">
-      <div class="content">
-        <div class="image-box">
-          <img draggable="false" src="contact1.png" alt="">
-        </div>
-      <form id="contact-form">
-        
-        <div class="form-group">
-          <div class="field">
-            <input type="text" name="name" placeholder="Name" required class="username">
-            <i class='fas fa-user'></i>
-          </div>
-          <div class="field">
-            <input type="text" name="email" placeholder="Email" required>
-            <i class='fas fa-envelope'></i>
-          </div>
-          <div class="field">
-            <input type="text" name="phone" placeholder="Phone">
-            <i class='fas fa-phone-alt'></i>
-          </div>
-          <div class="message">
-          <textarea placeholder="Message" name="message" required></textarea>
-          <i class="fas fa-comment-dots"></i>
-          </div>
-          </div>
-        <div class="button-area">
-          <button type="submit">
-            Submit <i class="fa fa-paper-plane"></i></button>
-        </div>
-      </form>
-    </div>
-    </div>
-  </section>
-  <!-- contact section ends -->
-  
-  
-  <!-- footer section starts -->
-  <section class="footer">
-  
-    <div class="box-container">
-  
-        <div class="box">
-            <h3>Nitish Kumar - Personal Photo Storage</h3>
-            <p>Thank you for visiting my <b> Moments Scanner</b> website. Connect with me over other social media plateform. <br/> <br/> Keep Rising 🚀. Connect with me over live chat!</p>
-        </div>
-  
-        <div class="box">
-            <h3>quick links</h3>
-            <a href="#home"><i class="fas fa-chevron-circle-right"></i> Home</a>
-            <a href="#about"><i class="fas fa-chevron-circle-right"></i> About</a>
-            <a href="#update"><i class="fas fa-chevron-circle-right"></i> Updates</a>
-            <a href="#contact"><i class="fas fa-chevron-circle-right"></i>Contact</a>
-          
-        </div>
-  
-        <div class="box">
-            <h3>contact info</h3>
-            <p> <i class="fas fa-phone"></i>+917814889581</p>
-            <p> <i class="fas fa-envelope"></i>nitishk38938@gmail.com</p>
-            <p> <i class="fas fa-map-marked-alt"></i>Fatehgargh Sahib, Punjab - 140406</p>
-            <div class="share">
-  
-                <a href="https://www.linkedin.com/in/nitish-kumar-794a0b26b/" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
-                <a href="https://github.com/nitishkumar2026" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
-                <a href="mailto:nitishk38938@gmail.com" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
-  
-            </div>
-        </div>
-    </div>
-  
+    <!-- Typed.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-  </section>
-  <!-- footer section ends -->
-  
-  
-  <!-- scroll top btn -->
-  <a href="#home" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
-  <!-- scroll back to top -->
-  
-  
-  <!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
-  <!-- jquery cdn    For skills from skills.json-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
-  <!-- typed.js cdn  for typing Android,Web dev......-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
-  <!-- particle.js links -->
-  <script src="./assets/js/particles.min.js"></script>
-  <script src="./assets/js/app.js"></script>
-  
-  <!-- vanilla tilt.js links ----For making imgages tilt by hovering-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js" integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
-  <!-- scroll reveal anim -->
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script src="assets/js/scrollreveal.js"></script>
-  
-  <!-- for emailjs-com --- -->
-  <script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
-      ></script>
-  
-  <!-- for icons -->
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  
-  <!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
-  
-
-
-
-
+    <!-- AOS Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+        });
+    </script>
+    
+    <!-- jsPDF -->
+    <!-- Load non-critical JS at the end of body for better performance -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom Script - Load last for fastest page rendering -->
     <script src="script.js"></script>
 </body>
 </html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
